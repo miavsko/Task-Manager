@@ -13,7 +13,7 @@ function Task() {
   const [editDescription, setEditDescription] = useState('')
   const [editPriority, setEditPriority] = useState('Medium')
 
-  const API = 'http://localhost:3000/task'
+const API = `${import.meta.env.VITE_API_URL}/task`
 
   // Get tasks from the backend
   const getTasks = async () => {
