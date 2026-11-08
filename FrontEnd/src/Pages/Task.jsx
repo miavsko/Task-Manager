@@ -13,9 +13,8 @@ function Task() {
   const [editDescription, setEditDescription] = useState('')
   const [editPriority, setEditPriority] = useState('Medium')
 
-const API = `${import.meta.env.VITE_API_URL}/task`
+const API = 'https://task-manager-i3j4.onrender.com/task'
 
-  // Get tasks from the backend
   const getTasks = async () => {
     const response = await fetch(API)
     const data = await response.json()
@@ -26,7 +25,6 @@ const API = `${import.meta.env.VITE_API_URL}/task`
     getTasks()
   }, [])
 
-  // Add a new task
   const addTask = async (e) => {
     e.preventDefault()
 
@@ -50,7 +48,6 @@ const API = `${import.meta.env.VITE_API_URL}/task`
     getTasks()
   }
 
-  // Delete a task
   const deleteTask = async (id) => {
     await fetch(`${API}/delete/${id}`, {
       method: 'DELETE'
@@ -58,8 +55,6 @@ const API = `${import.meta.env.VITE_API_URL}/task`
 
     getTasks()
   }
-
-  // Complete or uncomplete a task
   const toggleTask = async (task) => {
     await fetch(`${API}/update/${task._id}`, {
       method: 'PUT',
@@ -74,15 +69,12 @@ const API = `${import.meta.env.VITE_API_URL}/task`
     getTasks()
   }
 
-  // Start editing
   const startEditing = (task) => {
     setEditingId(task._id)
     setEditTitle(task.title)
     setEditDescription(task.description || '')
     setEditPriority(task.priority || 'Medium')
   }
-
-  // Save edited task
   const saveEdit = async (id) => {
     await fetch(`${API}/update/${id}`, {
       method: 'PUT',
@@ -100,14 +92,12 @@ const API = `${import.meta.env.VITE_API_URL}/task`
     getTasks()
   }
 
-  // Task statistics
   const completedTasks = tasks.filter(task => task.completed).length
   const pendingTasks = tasks.length - completedTasks
 
   return (
     <div className="app">
 
-      {/* Header */}
       <header className="header">
         <h2>TaskFlow.</h2>
         <p>My Workspace</p>
@@ -115,13 +105,12 @@ const API = `${import.meta.env.VITE_API_URL}/task`
 
       <main className="container">
 
-        {/* Welcome Section */}
         <section className="welcome">
           <h1>My Tasks</h1>
           <p>Organise your day and stay productive.</p>
         </section>
 
-        {/* Statistics */}
+   
         <section className="stats">
 
           <div className="stat-card total">
@@ -140,8 +129,6 @@ const API = `${import.meta.env.VITE_API_URL}/task`
           </div>
 
         </section>
-
-        {/* Add Task */}
         <section className="form-section">
           <h2>Add a New Task</h2>
 
@@ -179,7 +166,6 @@ const API = `${import.meta.env.VITE_API_URL}/task`
           </form>
         </section>
 
-        {/* Task List */}
         <section className="tasks-section">
 
           <div className="section-heading">
